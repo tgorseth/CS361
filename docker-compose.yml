@@ -1,0 +1,43 @@
+services:
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+  training-service:
+    build: ./training-service
+    ports:
+      - "3001:3001"
+    restart: unless-stopped
+
+  dashboard-service:
+    build: ./dashboard-service
+    ports:
+      - "3002:3002"
+    restart: unless-stopped
+
+  preferences-service:
+    build: ./preferences-service
+    ports:
+      - "3003:3003"
+    restart: unless-stopped
+
+  gateway:
+    build: ./gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - training-service
+      - dashboard-service
+      - preferences-service
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:alpine
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    ports:
+      - "8081:80"
+    restart: unless-stopped

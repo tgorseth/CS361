@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ language }}">
+  <head>
+    <meta charset="utf-8" />
+    <title>Module Completed</title>
+    <style>
+      body { font-family: {{ font }}; color: #222; }
+      .card { border: 1px solid #ddd; padding: 16px; border-radius: 8px; }
+      .btn { background: #1f6feb; color: #fff; padding: 10px 16px; text-decoration: none; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Module completed</h1>
+      <p>You completed module {{ module_title }}.</p>
+      <p>Next step: await trainer signoff for required procedures.</p>
+      <a class="btn" href="{{ portal_url }}">View progress</a>
+    </div>
+  </body>
+</html>

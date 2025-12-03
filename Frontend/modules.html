@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training Modules - Training System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Fixed Navigation Bar with Back button under-->
+  <nav class="navbar">
+    <div class="nav-logo">Training System</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="modules.html" class="active">Modules</a></li>
+      <li><a href="progress.html">Progress</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="#" id="logoutNav">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="back-button-container">
+    <button id="backButton">⬅ Back to Dashboard</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Training Modules</h1>
+    <p>Browse and start your available training modules below.</p>
+    <hr>
+
+    <div id="modulesContainer" class="modules-grid">
+      <!-- Modules loaded here -->
+    </div>
+  </div>
+
+<script src="auth.js"></script>
+<script>
+
+  // Get logged-in user and progress
+  const user = sessionStorage.getItem('loggedInUser');
+  if (!user) {
+    window.location.href = 'index.html';
+  }
+
+  const progressKey = `${user}_progress`;
+  const userProgress = JSON.parse(localStorage.getItem(progressKey)) || {};
+
+  // Sample modules
+  const modules = [
+    { id: 1, title: "Module 1: Introduction to Safety", description: "Learn the basics of workplace safety.", progress: userProgress[1] ? "Completed" : "100%" },
+    { id: 2, title: "Module 2: Advanced Equipment Handling", description: "Understand how to safely use advanced equipment.", progress: userProgress[2] ? "Completed" : "25%" },
+    { id: 3, title: "Module 3: Emergency Response", description: "How to act effectively during emergencies.", progress: userProgress[3] ? "Completed" : "0%" },
+  ];
+
+  const container = document.getElementById('modulesContainer');
+
+  // Render modules
+  modules.forEach(mod => {
+    const card = document.createElement('div');
+    card.classList.add('module-card');
+    card.innerHTML = `
+      <h3>${mod.title}</h3>
+      <p>${mod.description}</p>
+      <p><strong>Progress:</strong> ${mod.progress}</p>
+      <button onclick="startModule(${mod.id})">Start Module</button>
+    `;
+    container.appendChild(card);
+  });
+
+  // Start Module Function with Dependency Check
+  function startModule(id) {
+    // Check dependency: must complete Module 2 before Module 3
+    if (id === 3 && !userProgress[2]) {
+      alert("⚠️ You must complete Module 2 before continuing to Module 3.");
+      return;
+    }
+
+    alert("Starting Module " + id);
+  }
+</script>
+
+
+</body>
+</html>

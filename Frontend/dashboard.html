@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - Training System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-logo">Training System</div>
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="progress.html">Progress</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li><a href="#" id="logoutNav">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>Training Dashboard</h1>
+    <p id="welcomeUser">
+    </p>
+    <p>Use this to track what modules you need to complete.</p>
+    <hr>
+
+    <h2>Training Modules</h2>
+    <ul id="moduleList"></ul>
+
+
+    <button id="resetProgressBtn" style="margin-top:10px;">Reset All Progress</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>
